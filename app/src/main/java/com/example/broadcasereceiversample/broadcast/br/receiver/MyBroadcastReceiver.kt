@@ -1,4 +1,4 @@
-package com.example.broadcasereceiversample.receiver
+package com.example.broadcasereceiversample.broadcast.br.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

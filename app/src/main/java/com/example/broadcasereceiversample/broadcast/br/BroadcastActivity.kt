@@ -1,21 +1,20 @@
-package com.example.broadcasereceiversample
+package com.example.broadcasereceiversample.broadcast.br
 
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.example.broadcasereceiversample.customreceiver.MyCustomBr
-import com.example.broadcasereceiversample.databinding.ActivityMainBinding
-import com.example.broadcasereceiversample.orderedreceiver.MyOrderedBr1
-import com.example.broadcasereceiversample.orderedreceiver.MyOrderedBr2
-import com.example.broadcasereceiversample.orderedreceiver.MyOrderedBr3
-import com.example.broadcasereceiversample.receiver.MyBroadcastReceiver
+import com.example.broadcasereceiversample.broadcast.br.customreceiver.MyCustomBr
+import com.example.broadcasereceiversample.broadcast.br.orderedreceiver.MyOrderedBr1
+import com.example.broadcasereceiversample.broadcast.br.orderedreceiver.MyOrderedBr2
+import com.example.broadcasereceiversample.broadcast.br.orderedreceiver.MyOrderedBr3
+import com.example.broadcasereceiversample.broadcast.br.receiver.MyBroadcastReceiver
+import com.example.broadcasereceiversample.broadcast.databinding.ActivityBroadcastBinding
 
-class MainActivity : AppCompatActivity() {
-    private var _binding: ActivityMainBinding? = null
+class BroadcastActivity : AppCompatActivity() {
+    private var _binding: ActivityBroadcastBinding? = null
     private val binding get() = _binding
 
     private val broadcast = MyBroadcastReceiver()
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityBroadcastBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         binding?.btnSendCustomBroadcast?.setOnClickListener {
@@ -62,8 +61,8 @@ class MainActivity : AppCompatActivity() {
                 it.addCategory(Intent.CATEGORY_DEFAULT)
             }
 
+            //sendOrderedBroadcast(customIntentForBr1,null,orderedBr2,null)
             sendOrderedBroadcast(customIntentForBr1,null)
-//            sendOrderedBroadcast(customIntentForBr1,null)
 //            sendOrderedBroadcast(customIntentForBr2,null)
         }
     }
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
         val customIntentForBr1 = IntentFilter("com.myorderedBr1").also {
             it.addCategory(Intent.CATEGORY_DEFAULT)
-            it.priority = 4
+            it.priority = 1
         }
         val customIntentForBr2 = IntentFilter("com.myorderedBr2").also {
             it.addCategory(Intent.CATEGORY_DEFAULT)
@@ -111,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         }
         val customIntentForBr3 = IntentFilter("com.myorderedBr3").also {
             it.addCategory(Intent.CATEGORY_DEFAULT)
-            it.priority = 5
+            it.priority = 3
         }
 
         if (isRegistered){

@@ -1,4 +1,4 @@
-package com.example.broadcasereceiversample.orderedreceiver
+package com.example.broadcasereceiversample.broadcast.br.orderedreceiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

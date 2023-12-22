@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.broadcasereceiversample.broadcast">
 
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
 
     <application
         android:allowBackup="true"
@@ -18,7 +22,7 @@
         android:theme="@style/Theme.BroadcaseReceiverSample"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.mycomposeproject.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,44 +31,56 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".receiver.MyBroadcastReceiver"
+        <activity
+            android:name=".br.BroadcastActivity"
+            android:exported="true" />
+
+        <activity android:name=".contentprovider.ContentProviderActivity"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".br.receiver.MyBroadcastReceiver"
             android:exported="false"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
 
         </receiver>
-        <receiver android:name=".customreceiver.MyCustomBr"
+        <receiver
+            android:name=".br.customreceiver.MyCustomBr"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.mycustom.receiver"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.mycustom.receiver" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
         </receiver>
 
-        <receiver android:name=".orderedreceiver.MyOrderedBr1"
+        <receiver
+            android:name=".br.orderedreceiver.MyOrderedBr1"
             android:exported="true">
-            <intent-filter>
-                <action android:name="com.myorderedBr1"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+            <intent-filter android:priority="1">
+                <action android:name="com.myorderedBr1" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".orderedreceiver.MyOrderedBr2"
+        <receiver
+            android:name=".br.orderedreceiver.MyOrderedBr2"
             android:exported="true">
-            <intent-filter>
-                <action android:name="com.myorderedBr2"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+            <intent-filter android:priority="2">
+                <action android:name="com.myorderedBr2" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".orderedreceiver.MyOrderedBr3"
+        <receiver
+            android:name=".br.orderedreceiver.MyOrderedBr3"
             android:exported="true">
-            <intent-filter>
-                <action android:name="com.myorderedBr3"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+            <intent-filter android:priority="3">
+                <action android:name="com.myorderedBr3" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
